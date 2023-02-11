@@ -1,8 +1,10 @@
 <section class="login">
-    <form class="form-login" action={{route('inicio')}} method="post">
+    <form class="form-login" action={{route('login')}} method="POST">
+        @csrf
+
         <label class="label-email" for="email">Email</label> <label class="label-contrasenya" for="contrasenya">Contraseña</label><br>
-        <input type="text" name="email">
-        <input type="password" name="contrasenya">
+        <input type="email" name="email">
+        <input type="password" name="password">
         <input class="boton-entrar" type="submit" value="Entrar">
         <div class="bajo-inputs">
             <div class="div-recordar">
@@ -10,16 +12,14 @@
                 <label id="label-recordar" class="label-recordar" for="recordar">Recordarme</label>
             </div>
             <div class="div-olvidado-contrasenya">
-                <a href={{route('login')}}>¿Has olvidado tu contraseña?</a>
+                <a href="#">¿Has olvidado tu contraseña?</a>
             </div>
         </div>
     </form>
 
-    @if ($errors->any())
+    @if (isset($error))
         <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{$error}}</li>
-            @endforeach
+            <li>{{$error}}</li>
         </ul>
     @endif
 

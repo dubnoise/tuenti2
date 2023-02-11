@@ -3,7 +3,7 @@
 @section('titulo', 'Tuenti')
 
 @section('contenido')
-@if (1 == 2)
+@if (!Auth::check())
 
 @include('auth.login');
 

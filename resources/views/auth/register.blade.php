@@ -32,14 +32,14 @@
                 <br>
                 <label for="country">País</label>
                 <select class="input-registro" name="country" id="country">
-                    <option value="españa">España</option>
+                    <option value="España">España</option>
                 </select>
                 <br>
                 <label for="city">Ciudad</label>
                 <select class="input-registro" name="city" id="city">
-                    <option value="valencia">Valencia</option>
-                    <option value="alicante">Alicante</option>
-                    <option value="castellon">Castellón</option>
+                    <option value="Valencia">Valencia</option>
+                    <option value="Alicante">Alicante</option>
+                    <option value="Castellon">Castellón</option>
                 </select>
                 <br>
                 <label for="birthdate">Fecha de nacimiento</label>
@@ -47,9 +47,9 @@
                 <br>
                 <div class="genre-class">
                     <label for="genre">Sexo</label>
-                    <input type="radio" name="genre" value="hombre" id="men">
+                    <input type="radio" name="genre" value="Hombre" id="men">
                     <label for="men">Hombre</label>
-                    <input type="radio" name="genre" value="mujer" id="women">
+                    <input type="radio" name="genre" value="Mujer" id="women">
                     <label for="women">Mujer</label>
 
                     {{-- <input type="text" name="genre"> --}}

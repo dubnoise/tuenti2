@@ -2,14 +2,14 @@
     <div class="cabecera-1">
         <a href={{route('inicio')}}>
             <div class="logo">
-                <img src="img/tuenti.png" alt="logo"><h1>tuenti</h1>
+                <img src={{asset('img/tuenti.png')}} alt="logo"><h1>tuenti</h1>
             </div>
         </a>
 
         <nav>
             <ul>
-                <a href="#"><li>Inicio</li></a>
-                <a href="#"><li>Perfil</li></a>
+                <a href={{route('inicio')}}><li>Inicio</li></a>
+                <a href={{route('users.show', auth()->user()->id)}}><li>Perfil</li></a>
                 <a href="#"><li>Mensajes</li></a>
                 <a href="#"><li>Gente</li></a>
             </ul>
@@ -27,7 +27,7 @@
         <nav>
             <ul>
                 <a href="#"><li>Mi cuenta</li></a>
-                <a href="#"><li>Salir</li></a>
+                <a href={{route('logout')}}><li>Salir</li></a>
             </ul>
         </nav>
     </div>

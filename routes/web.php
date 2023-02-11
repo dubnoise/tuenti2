@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Monolog\Handler\RotatingFileHandler;
 
@@ -19,7 +21,11 @@ Route::get('/', function () {
     return view('inicio');
 })->name('inicio');
 
-Route::resource('users', UserController::class);
+// Route::get('profile', function() {
+//     return view('profile');
+// })->name('profile');
+
+
 
 Route::get('registro', [LoginController::class, 'registerForm']);
 Route::post('registro', [LoginController::class, 'register'])->name('registro');
@@ -31,3 +37,6 @@ Route::get('cuenta', function(){
     return view('auth.account');
 })->name('users.account')
 ->middleware('auth');
+
+Route::resource('users', UserController::class);
+Route::resource('posts', PostController::class);
