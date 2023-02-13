@@ -10,7 +10,8 @@
             <ul>
                 <a href={{route('inicio')}}><li>Inicio</li></a>
                 <a href={{route('users.show', auth()->user()->id)}}><li>Perfil</li></a>
-                <a href="#"><li>Mensajes</li></a>
+                <a href={{route('messages.index')}}><li>Mensajes</li></a>
+                {{-- <a href={{route('posts.index')}}><li>Posts</li></a> --}}
                 <a href="#"><li>Gente</li></a>
             </ul>
         </nav>

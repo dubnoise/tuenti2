@@ -3,6 +3,7 @@
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\MessageController;
 use Illuminate\Support\Facades\Route;
 use Monolog\Handler\RotatingFileHandler;
 
@@ -40,3 +41,4 @@ Route::get('cuenta', function(){
 
 Route::resource('users', UserController::class);
 Route::resource('posts', PostController::class);
+Route::resource('messages', MessageController::class);

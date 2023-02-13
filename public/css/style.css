@@ -357,6 +357,11 @@ main{
     min-height: 100vh;
     background-color: white;
 }
+.novedades{
+    border: 1px solid red;
+    height: 100%;
+}
+
 .lateral-izq{
     border: 1px solid black;
     width: 22.5%;
@@ -373,7 +378,8 @@ main{
     width: 55%;
     border: 1px solid black;
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
+    flex-direction: column;
 }
 .central .form-estado{
     border: 1px solid green;
@@ -403,6 +409,7 @@ main{
 }
 .central .form-estado .guardar:hover{
     background-color: rgb(38, 62, 241);
+    cursor:pointer;
 }
 .form-estado .ultima-act{
     /* border: 1px solid green; */
@@ -446,4 +453,31 @@ main{
     margin-left: 1em;
 }
 
+/* MENSAJES */
+.messages{
+    display: flex;
+    /* border: 1px solid red; */
+    flex-direction: column;
+    width: 90%;
+}
+
+
+.message{
+    border-radius: 1px;
+    display: flex;
+    height: 5em;
+    align-items: center;
+    padding: 20px;
+    /* border: 1px solid red; */
+}
+.message:hover{
+    background-color: rgba(181, 210, 235, 0.482);
+}
+.messages img{
+    border-radius: 1px;
+    margin-right: 1em;
+    border: 1px solid rgba(151, 148, 148, 0.699);
+    width: 3em;
+    height: 3em;
+}
 
