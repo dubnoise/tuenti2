@@ -5,18 +5,17 @@
 @section('contenido')
 @if (!Auth::check())
 
-@include('auth.login');
+    @include('auth.login');
 
 @else
 
-@section('contenido')
-<header>
-    @include('partials.header')
-</header>
-<main>
-    @include('partials.main')
-</main>
-@endif
+    <header>
+        @include('partials.header')
+    </header>
+    <main>
+        @include('partials.main')
+    </main>
 
+@endif
 
 @endsection

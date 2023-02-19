@@ -27,7 +27,6 @@ Route::get('/', function () {
 // })->name('profile');
 
 
-
 Route::get('registro', [LoginController::class, 'registerForm']);
 Route::post('registro', [LoginController::class, 'register'])->name('registro');
 Route::get('login', [LoginController::class, 'loginForm']);
@@ -41,4 +40,9 @@ Route::get('cuenta', function(){
 
 Route::resource('users', UserController::class);
 Route::resource('posts', PostController::class);
+// Route::get('/', function () {
+//     return view('posts.index');
+// })->name('inicio');
 Route::resource('messages', MessageController::class);
+
+
