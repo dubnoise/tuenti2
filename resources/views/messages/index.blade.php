@@ -10,15 +10,16 @@
 
 <main>
     <div class="lateral-izq">
-        <h2>-</h2>
+        <a class="btn-new-message" href="{{route('users.search')}}"><span><img class="icon-new-message" src="img/new-message.png" alt="new message"></span><p>Escribir nuevo mensaje</p></a>
     </div>
+
     <div class="central">
         <div class="messages">
-            @foreach ($messages as $mensaje)
-            <a href={{route('messages.show', $mensaje->id)}}>
+            @foreach ($messages as $message)
+            <a href={{route('messages.show', $message->id)}}>
                 <div class="message">
                     <img src={{asset('img/blank-user.jpg')}} alt="user">
-                    <h4>{{$mensaje->user_id}}</h4>
+                    <h4>{{$message->user_id}}</h4>
                 </div>
             </a>
                 <hr>

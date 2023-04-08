@@ -4,28 +4,13 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\PictureController;
 use Illuminate\Support\Facades\Route;
 use Monolog\Handler\RotatingFileHandler;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 Route::get('/', function () {
     return view('inicio');
 })->name('inicio');
-
-// Route::get('profile', function() {
-//     return view('profile');
-// })->name('profile');
-
 
 Route::get('registro', [LoginController::class, 'registerForm']);
 Route::post('registro', [LoginController::class, 'register'])->name('registro');
@@ -38,11 +23,13 @@ Route::get('cuenta', function(){
 })->name('users.account')
 ->middleware('auth');
 
+
+Route::get('/users/search', 'App\Http\Controllers\UserController@search')->name('users.search');
 Route::resource('users', UserController::class);
 Route::resource('posts', PostController::class);
-// Route::get('/', function () {
-//     return view('posts.index');
-// })->name('inicio');
+
+
 Route::resource('messages', MessageController::class);
+Route::resource('pictures', PictureController::class);
 
 

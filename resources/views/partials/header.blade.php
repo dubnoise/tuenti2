@@ -20,9 +20,8 @@
             <input type="text" placeholder="Buscar...">
         </form>
 
-        <form action="#" method="POST" enctype="multipart/form-data">
-            <input type="file" name="subir_fotos" multiple>
-        </form>
+        @include('pictures.create')
+
     </div>
     <div class="cabecera-2">
         <nav>

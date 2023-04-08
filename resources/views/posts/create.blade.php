@@ -1,7 +1,7 @@
 <form action={{route('posts.store')}} method="POST" class="form-estado">
     @csrf
 
-    <input type="hidden" name="user_id" value={{auth()->user()->id}}>
+    <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
     <input type="text" name="content" placeholder="Actualiza tu estado" class="estado">
     <p id="estado-error">
         @error('content')

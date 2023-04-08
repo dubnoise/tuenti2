@@ -18,6 +18,10 @@ class User extends Authenticatable
         return $this->hasMany(Message::class);
     }
 
+    public function pictures(){
+        return $this->hasMany(Picture::class);
+    }
+
     use HasApiTokens, HasFactory, Notifiable;
 
     /**

@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use App\Models\Message;
+use App\Models\Picture;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class PictureController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +14,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        $messages = Message::all();
-        return view ('users.index', compact('users', 'messages'));
+        $pictures = Picture::all();
+        return view ('pictures.index', compact('pictures'));
     }
 
     /**
@@ -27,7 +25,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $pictures = Picture::all();
+        return view('pictures.create', compact('pictures'));
     }
 
     /**
@@ -38,27 +37,40 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $picture = new Picture();
+        $picture->url = $request->get('url');
+        $picture->user_id = $request->get('user_id');
+        $picture->save();
+
+        if ($request->hasFile('picture')) {
+
+            $path = $request->file('picture')->storeAs('public/pictures/'.$picture->user_id, $picture->url.'.jpg', ['mode' => 777]);
+
+
+        }
+
+        return redirect()->route('inicio');
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Picture  $picture
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(Picture $picture)
     {
-        return view ('users.show', compact('user'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Picture  $picture
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Picture $picture)
     {
         //
     }
@@ -67,10 +79,10 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Picture  $picture
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Picture $picture)
     {
         //
     }
@@ -78,21 +90,11 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Picture  $picture
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Picture $picture)
     {
         //
     }
-    public function search(Request $request)
-    {
-        $users = User::where('name', 'like', '%'.$request->input('q').'%')
-            ->orWhere('email', 'like', '%'.$request->input('q').'%')
-            ->get();
-
-        return view('users.search', ['users' => $users]);
-    }
-
-
 }

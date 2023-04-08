@@ -35,6 +35,7 @@
     </div>
     <div class="lateral-der">
         <h2>-</h2>
+        <a href="{{route('pictures.index')}}">Ver todas</a>
     </div>
 
 </main>

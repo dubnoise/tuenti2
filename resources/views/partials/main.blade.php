@@ -10,7 +10,7 @@
     </div>
     <div class="central">
         @include('posts.create')
-        @include('posts.index')
+        {{-- @include('posts.index') --}}
     </div>
     <div class="lateral-der">
         <h2>-</h2>

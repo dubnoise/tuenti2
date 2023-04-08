@@ -34,7 +34,9 @@ class MessageController extends Controller
     public function create()
     {
         $messages = Message::all();
-        return view('messages.create', compact('messages'));
+        $users = User::all();
+        return view('messages.create', compact('messages', 'users'));
+
     }
 
     /**
@@ -48,7 +50,7 @@ class MessageController extends Controller
         $message = new Message();
         $message->content = $request->get('content');
         $message->user_id = $request->get('user_id');
-        $message->to_user_id = $request->get('to_user_id');
+        $message->user_id_2 = $request->get('user_id_2');
         $message->save();
 
         return redirect()->route('inicio');
@@ -99,4 +101,5 @@ class MessageController extends Controller
     {
         //
     }
+
 }
