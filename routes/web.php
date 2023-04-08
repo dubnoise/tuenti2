@@ -4,6 +4,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PictureController;
 use Illuminate\Support\Facades\Route;
 use Monolog\Handler\RotatingFileHandler;
@@ -23,12 +24,11 @@ Route::get('cuenta', function(){
 })->name('users.account')
 ->middleware('auth');
 
-
 Route::get('/users/search', 'App\Http\Controllers\UserController@search')->name('users.search');
+
+Route::resource('home', HomeController::class);
 Route::resource('users', UserController::class);
 Route::resource('posts', PostController::class);
-
-
 Route::resource('messages', MessageController::class);
 Route::resource('pictures', PictureController::class);
 

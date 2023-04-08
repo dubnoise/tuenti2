@@ -19,7 +19,7 @@
             <a href={{route('messages.show', $message->id)}}>
                 <div class="message">
                     <img src={{asset('img/blank-user.jpg')}} alt="user">
-                    <h4>{{$message->user_id}}</h4>
+                    <h4>{{$message->name}}</h4>
                 </div>
             </a>
                 <hr>

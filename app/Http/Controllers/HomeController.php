@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Post;
+use App\Http\Requests\PostRequest;
+
 
 use Illuminate\Http\Request;
 
@@ -13,17 +16,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        //
+        // Lógica para obtener los registros existentes
+        $posts = Post::all();
+
+        return view('partials.main', compact('posts'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('create');
     }
 
     /**

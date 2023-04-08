@@ -27,12 +27,6 @@
 
         @if ($users->count() > 0)
             <table class="table">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Email</th>
-                    </tr>
-                </thead>
                 <tbody>
                     @foreach ($users as $user)
                         <tr>
