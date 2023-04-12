@@ -4,7 +4,7 @@
 
 @section('contenido')
 
-    <a href={{route('inicio')}}>
+    <a href={{route('home')}}>
         <div class="h1-tuenti">
             <img src="img/tuenti.png" alt="logo"><h1>tuenti</h1>
         </div>

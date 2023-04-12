@@ -27,7 +27,7 @@ class LoginController extends Controller
         $user->save();
         Auth::login($user);
 
-        return redirect()->route('inicio');
+        return redirect()->route('home');
     }
 
     public function loginForm(){
@@ -36,7 +36,7 @@ class LoginController extends Controller
         }
         else{
             if (Auth::check()){
-                return redirect()->route('inicio');
+                return redirect()->route('home');
             }
             else{
                 return view('auth.login');
@@ -48,17 +48,17 @@ class LoginController extends Controller
 
         if (Auth::guard('web')->attempt($credenciales)){
             $request->session()->regenerate();
-            return redirect()->route('inicio');
+            return redirect()->route('home');
         }
         else{
             $error = 'Error al acceder a Tuenti.';
-            return view('inicio', compact('error'));
+            return view('home', compact('error'));
         }
     }
     public function logout(Request $request){
         Auth::guard('web')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('inicio');
+        return redirect()->route('home');
     }
 }

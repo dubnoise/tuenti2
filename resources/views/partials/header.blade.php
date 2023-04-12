@@ -1,6 +1,6 @@
 <div class="cabecera">
     <div class="cabecera-1">
-        <a href={{route('inicio')}}>
+        <a href={{route('home')}}>
             <div class="logo">
                 <img src={{asset('img/tuenti.png')}} alt="logo"><h1>tuenti</h1>
             </div>
@@ -8,17 +8,18 @@
 
         <nav>
             <ul>
-                <a href={{route('inicio')}}><li>Inicio</li></a>
-                <a href={{route('users.show', auth()->user()->id)}}><li>Perfil</li></a>
-                <a href={{route('messages.index')}}><li>Mensajes</li></a>
-                {{-- <a href={{route('posts.index')}}><li>Posts</li></a> --}}
+                <a href="{{ route('home') }}"><li>Inicio</li></a>
+                <a href="{{ route('users.show', auth()->user()->id) }}"><li>Perfil</li></a>
+                <a href="{{ route('messages.index') }}"><li>Mensajes</li></a>
                 <a href="#"><li>Gente</li></a>
             </ul>
         </nav>
 
-        <form action="#" method="POST" enctype="multipart/form-data">
-            <input type="text" placeholder="Buscar...">
+        <form action="{{ route('users.search') }}" method="GET" enctype="multipart/form-data">
+            <input type="text" id="q" name="q" class="form-control" value="{{ request('q') }}" placeholder="Buscar...">
+            <button type="submit">Buscar</button>
         </form>
+
 
         @include('pictures.create')
 

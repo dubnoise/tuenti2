@@ -31,11 +31,15 @@
                     @foreach ($users as $user)
                         <tr>
 
-                            <a href={{route('messages.create', 'id='.$user->id)}}>
+                            <a href="{{ route('users.show', $user->id) }}">{{$user->name}}</a>
+                            <a href="{{ route('messages.create', 'id='.$user->id) }}">Mensaje privado</a>
+
+
+                            {{-- <a href={{route('messages.create', 'id='.$user->id)}}>
                                 <div class="message">
                                     <h1>{{$user->name}}</h1>
                                 </div>
-                            </a>
+                            </a> --}}
 
                         </tr>
                     @endforeach

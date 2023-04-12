@@ -9,9 +9,9 @@ use App\Http\Controllers\PictureController;
 use Illuminate\Support\Facades\Route;
 use Monolog\Handler\RotatingFileHandler;
 
-Route::get('/', function () {
-    return view('inicio');
-})->name('inicio');
+// Route::get('/', function () {
+//     return view('inicio');
+// })->name('inicio');
 
 Route::get('registro', [LoginController::class, 'registerForm']);
 Route::post('registro', [LoginController::class, 'register'])->name('registro');
@@ -26,7 +26,13 @@ Route::get('cuenta', function(){
 
 Route::get('/users/search', 'App\Http\Controllers\UserController@search')->name('users.search');
 
-Route::resource('home', HomeController::class);
+// Ruta para mostrar la página de inicio
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+// Ruta para guardar un nuevo post
+// Route::post('/', [HomeController::class, 'store'])->name('home.store');
+
+
 Route::resource('users', UserController::class);
 Route::resource('posts', PostController::class);
 Route::resource('messages', MessageController::class);

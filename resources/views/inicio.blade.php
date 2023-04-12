@@ -1,4 +1,4 @@
-@extends('layout')
+{{-- @extends('layout')
 
 @section('titulo', 'Tuenti')
 
@@ -14,8 +14,9 @@
     </header>
     <main>
         @include('partials.main')
+        @include('home')
     </main>
 
 @endif
 
-@endsection
+@endsection --}}

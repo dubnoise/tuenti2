@@ -16,7 +16,7 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::all();
-        return view('posts.create', compact('posts'));
+        return view('posts.index', compact('posts'));
     }
 
     /**
@@ -43,7 +43,7 @@ class PostController extends Controller
         $post->user_id = $request->get('user_id');
         $post->save();
 
-        return redirect()->route('inicio');
+        return redirect()->route('home');
     }
 
     /**

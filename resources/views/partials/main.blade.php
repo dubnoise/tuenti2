@@ -1,4 +1,4 @@
-@extends('layout')
+{{-- @extends('layout')
 
 @section('titulo', 'Tuenti')
 
@@ -10,11 +10,11 @@
     </div>
     <div class="central">
         @include('posts.create')
-        {{-- @include('posts.index') --}}
+        @include('posts.index')
     </div>
     <div class="lateral-der">
         <h2>-</h2>
     </div>
 </main>
 
-@endsection
+@endsection --}}

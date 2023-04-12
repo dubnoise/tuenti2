@@ -22,6 +22,10 @@ class User extends Authenticatable
         return $this->hasMany(Picture::class);
     }
 
+    public function follows(){
+        return $this->belongsToMany(Follow::class);
+    }
+
     use HasApiTokens, HasFactory, Notifiable;
 
     /**

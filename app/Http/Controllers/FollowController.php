@@ -1,14 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Post;
-use App\Models\User;
-use App\Http\Requests\PostRequest;
 
-
+use App\Models\Follow;
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class FollowController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,17 +14,17 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // Obtener todos los posts existentes
-        $posts = Post::all();
-        $users = User::all();
-
-        // Retornar la vista home.blade.php y pasar la variable $posts
-        return view('home', compact('posts', 'users'));
+        //
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
-        return view('create');
+        //
     }
 
     /**
@@ -38,22 +35,16 @@ class HomeController extends Controller
      */
     public function store(Request $request)
     {
-        // // Crear un nuevo post y guardarlo en la base de datos
-        // $post = new Post;
-        // $post->content = $request->content;
-        // $post->save();
-
-        // // Redirigir al usuario a la página de inicio
-        // return redirect()->route('home');
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Follow  $follow
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Follow $follow)
     {
         //
     }
@@ -61,10 +52,10 @@ class HomeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Follow  $follow
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Follow $follow)
     {
         //
     }
@@ -73,10 +64,10 @@ class HomeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Follow  $follow
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Follow $follow)
     {
         //
     }
@@ -84,10 +75,10 @@ class HomeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Follow  $follow
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Follow $follow)
     {
         //
     }

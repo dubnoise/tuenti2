@@ -16,7 +16,9 @@
 
         <form action="{{ route('messages.store') }}" method="post">
             @csrf
-
+            @foreach ($users as $user)
+                <h1>Mensaje para {{ $user->name }}</h1>
+            @endforeach
             <textarea name="content" cols="30" rows="10" placeholder="Escribir mensaje..."></textarea>
             <input type="hidden" name="user_id" value={{auth()->user()->id}}>
             <input type="hidden" name="user_id_2" value={{$_GET['id']}}>

@@ -40,7 +40,9 @@ class MessageController extends Controller
     public function create()
     {
         $messages = Message::all();
-        $users = User::all();
+        $users = User::select('users.*', 'users.name')
+        ->where('id', $_GET['id'])
+        ->get();
         return view('messages.create', compact('messages', 'users'));
 
     }
