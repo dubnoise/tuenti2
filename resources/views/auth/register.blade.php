@@ -4,9 +4,10 @@
 
 @section('contenido')
 
-    <a href={{route('home')}}>
+    <a href={{ route('home') }}>
         <div class="h1-tuenti">
-            <img src="img/tuenti.png" alt="logo"><h1>tuenti</h1>
+            <img src="img/tuenti.png" alt="logo">
+            <h1>tuenti</h1>
         </div>
     </a>
     <div class="registro">
@@ -15,7 +16,7 @@
         </div>
 
         <div class="form-registro">
-            <form action={{route('registro')}} method="post">
+            <form action={{ route('registro') }} method="post">
                 @csrf
 
                 <label for="name">Nombre</label>
@@ -51,12 +52,12 @@
                     <label for="men">Hombre</label>
                     <input type="radio" name="genre" value="Mujer" id="women">
                     <label for="women">Mujer</label>
-
-                    {{-- <input type="text" name="genre"> --}}
                 </div>
                 <br>
                 <div class="condiciones-de-uso">
-                    <p><input type="checkbox">Aceptas las <a href="#">Condiciones de uso</a> y <a href="#">la Política de privacidad</a> de Tuenti y que Tuenti te envíe comunicaciones, incluso por vía electrónica.</p>
+                    <p><input type="checkbox">Aceptas las <a href="#">Condiciones de uso</a> y <a href="#">la
+                            Política de privacidad</a> de Tuenti y que Tuenti te envíe comunicaciones, incluso por vía
+                        electrónica.</p>
                     <br>
                     <p>Lee un resumen en el <a href="#">Decálogo de las Condiciones de uso</a></p>
                 </div>
@@ -67,7 +68,7 @@
             @if ($errors->any())
                 <ul>
                     @foreach ($errors->all() as $error)
-                        <li>{{$error}}</li>
+                        <li>{{ $error }}</li>
                     @endforeach
                 </ul>
             @endif

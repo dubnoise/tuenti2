@@ -27,8 +27,13 @@
                             Error: {{ $message }}
                         @enderror
                     </p>
+                    <?php
+                        // Suponiendo que el ID del usuario actual está almacenado en la variable $userId
+                        $lastPost = DB::table('posts')->where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->first();
+                    ?>
+
                     <div class="ultima-act">
-                        <p id="ult-act"><b>Última actualización: </b></p>
+                        <p id="ult-act"><b>Última actualización:</b> <?php echo $lastPost->content ?? ''; ?></p>
                         <input type="submit" value="Guardar" class="guardar">
                     </div>
 
@@ -37,14 +42,27 @@
                 <div class="novedades">
                     <h3>Novedades de tus amigos</h3>
                     <hr>
-                    @forelse ($posts as $post)
+                    @forelse ($posts as $post )
                         <div class="novedad">
-                            <img src="img/blank-user.jpg" alt="{{$post->user->name}}">
-                            <a href="{{route('users.show', $post->user->id)}}">{{ $post->user->name }} {{ $post->user->surname }}</a>
+                            <a href="{{ route('users.show', $post->user->id) }}"><img src="img/blank-user.jpg"
+                                    alt="{{ $post->user->name }}"></a>
+                            <a href="{{ route('users.show', $post->user->id) }}">{{ $post->user->name }}
+                                {{ $post->user->surname }}</a>
                             <p>{{ $post->content }}</p>
                         </div>
                     @empty
                         <h2>No hay estados que mostrar</h2>
+                    @endforelse
+                    @forelse ($pictures as $picture)
+                        <div class="novedad">
+                            <a href="{{ route('users.show', $picture->user->id) }}"><img src="img/blank-user.jpg"
+                                    alt="{{ $picture->user->name }}"></a>
+                            <a href="{{ route('users.show', $picture->user->id) }}">{{ $picture->user->name }}
+                                {{ $picture->user->surname }}</a>
+                                <img src="{{ asset('storage/pictures/' . $picture->user->id . '/' . $picture->url . '.jpg') }}" alt="{{$picture->url}}">
+                        </div>
+                    @empty
+
                     @endforelse
                 </div>
             </div>

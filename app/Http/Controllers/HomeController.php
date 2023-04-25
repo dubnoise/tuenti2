@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\User;
+use App\Models\Picture;
 use App\Http\Requests\PostRequest;
 
 
@@ -17,12 +18,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // Obtener todos los posts existentes
-        $posts = Post::all();
-        $users = User::all();
 
-        // Retornar la vista home.blade.php y pasar la variable $posts
-        return view('home', compact('posts', 'users'));
+        $posts = Post::select('*')->orderBy('created_at', 'desc')->get();
+        $users = User::all();
+        $pictures = Picture::select('*')->orderBy('created_at', 'desc')->get();
+
+        return view('home', compact('posts', 'users', 'pictures'));
     }
 
     public function create()

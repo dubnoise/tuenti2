@@ -371,20 +371,24 @@ main{
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    background-color:rgb(210, 241, 255);
     width: auto;
     min-height: 10vh;
     padding: .5rem;
     border: 1px solid black;
 }
 .novedad a{
-    border: 1px solid black;
+    /* border: 1px solid black; */
     font-size: 17px;
     color: blue;
     font-weight: bold;
     margin-left: 1rem;
 }
+.novedad a:hover{
+    text-decoration: underline;
+}
 .novedad p{
-    border: 1px solid black;
+    /* border: 1px solid black; */
     margin-left: 1rem;
 }
 .novedad img{

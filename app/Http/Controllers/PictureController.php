@@ -49,7 +49,7 @@ class PictureController extends Controller
 
         }
 
-        return redirect()->route('inicio');
+        return redirect()->route('home');
 
     }
 

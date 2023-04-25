@@ -16,17 +16,11 @@ class MessageController extends Controller
      */
     public function index()
     {
-        // $messages = DB::table('messages')
-        //                 ->select('*')
-        //                 ->where('user_id_2', auth()->id())
-        //                 ->get();
-
         $messages = Message::select('messages.*', 'users.name')
         ->where('user_id_2', auth()->id())
         ->join('users', 'user_id', '=', 'users.id')
         ->get();
 
-        // $messages = Message::all();
         $users = User::all();
 
         return view ('messages.index', compact('messages', 'users'));
@@ -44,7 +38,6 @@ class MessageController extends Controller
         ->where('id', $_GET['id'])
         ->get();
         return view('messages.create', compact('messages', 'users'));
-
     }
 
     /**
@@ -72,7 +65,6 @@ class MessageController extends Controller
      */
     public function show(Message $message)
     {
-        // $user = User::all();
         return view ('messages.show', compact('message'));
     }
 
