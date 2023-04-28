@@ -5,9 +5,11 @@ use App\Models\Post;
 use App\Models\User;
 use App\Models\Picture;
 use App\Http\Requests\PostRequest;
+use Carbon\Carbon;
 
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -23,7 +25,18 @@ class HomeController extends Controller
         $users = User::all();
         $pictures = Picture::select('*')->orderBy('created_at', 'desc')->get();
 
-        return view('home', compact('posts', 'users', 'pictures'));
+        $lastPost = '';
+        $duracion = '';
+        if (Auth::check()){
+            $lastPost = Post::select('*')->where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->first();
+            $fecha = $lastPost->created_at;
+
+            $fechaSubida = new Carbon($fecha);
+            $fechaActual = Carbon::now();
+            $duracion = isset($lastPost) ? Carbon::parse($lastPost->created_at)->locale('es')->diffForHumans(['options' => Carbon::JUST_NOW]) : '';
+        }
+
+        return view('home', compact('posts', 'users', 'pictures', 'lastPost', 'duracion'));
     }
 
     public function create()

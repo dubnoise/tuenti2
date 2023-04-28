@@ -31,11 +31,28 @@
         </div>
     </div>
     <div class="central">
+        <div class="nombre-perfil">
+            <h3>{{ $user->name }} {{ $user->surname }}</h3>
+        </div>
 
+        <div class="mensaje-privado-perfil">
+            <a href="{{ route('messages.create', 'id='.$user->id) }}">Mensaje privado</a>
+        </div>
+
+        <div class="ultimo-estado-perfil">
+            @if(isset ($lastPost->content))
+                <h3>{{ $lastPost->content }} </h3>
+                <p>{{ $duracion }}</p>
+            @else
+                <p>Sin estado que mostrar.</p>
+            @endif
+
+        </div>
     </div>
     <div class="lateral-der">
         <h2>-</h2>
-        <a href="{{route('pictures.index')}}">Ver todas</a>
+        <a href="/pictures/{{$user->id}}">Ver todas</a>
+
     </div>
 
 </main>

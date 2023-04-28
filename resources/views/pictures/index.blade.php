@@ -15,16 +15,14 @@
 
     <div class="central">
         @php
-            $user = auth()->user();
-            $pictures = $user->pictures;
+            // $user = auth()->user();
+            // $pictures = $user->pictures;
 
 
         @endphp
 
         @forelse ($pictures as $picture)
-            <img src="{{ asset('storage/pictures/' . auth()->user()->id . '/' . $picture->url . '.jpg') }}" alt="{{$picture->url}}">
-
-
+            <img src="{{ asset('storage/pictures/' . $picture->user_id . '/' . $picture->url . '.jpg') }}" alt="{{$picture->url}}">
         @empty
             <h2>Nada</h2>
         @endforelse

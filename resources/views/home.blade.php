@@ -27,13 +27,9 @@
                             Error: {{ $message }}
                         @enderror
                     </p>
-                    <?php
-                        // Suponiendo que el ID del usuario actual está almacenado en la variable $userId
-                        $lastPost = DB::table('posts')->where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->first();
-                    ?>
 
                     <div class="ultima-act">
-                        <p id="ult-act"><b>Última actualización:</b> <?php echo $lastPost->content ?? ''; ?></p>
+                        <p id="ult-act"><b>Última actualización:</b> <?php echo $lastPost->content ?? ''; echo ' '; echo $duracion ; ?></p>
                         <input type="submit" value="Guardar" class="guardar">
                     </div>
 

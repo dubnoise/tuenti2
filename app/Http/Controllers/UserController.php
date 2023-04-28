@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Message;
+use App\Models\Post;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class UserController extends Controller
 {
@@ -49,7 +51,13 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view ('users.show', compact('user'));
+        $lastPost = Post::select('*')->where('user_id', $user->id)->orderBy('created_at', 'desc')->first();
+        $fecha = $lastPost->created_at;
+        $fechaSubida = new Carbon($fecha);
+        $fechaActual = Carbon::now();
+        $duracion = isset($lastPost) ? Carbon::parse($lastPost->created_at)->locale('es')->diffForHumans(['options' => Carbon::JUST_NOW]) : '';
+
+        return view ('users.show', compact('user', 'lastPost', 'duracion'));
     }
 
     /**

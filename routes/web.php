@@ -32,10 +32,10 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 // Ruta para guardar un nuevo post
 // Route::post('/', [HomeController::class, 'store'])->name('home.store');
 
-
+Route::get('/pictures/{userId}', [PictureController::class, 'index'])->name('pictures.index');
 Route::resource('users', UserController::class);
 Route::resource('posts', PostController::class);
 Route::resource('messages', MessageController::class);
-Route::resource('pictures', PictureController::class);
 
+Route::resource('pictures', PictureController::class);
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Picture;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PictureController extends Controller
@@ -12,11 +13,12 @@ class PictureController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($userId)
     {
-        $pictures = Picture::all();
-        return view ('pictures.index', compact('pictures'));
+        $pictures = Picture::where('user_id', $userId)->get();
+        return view('pictures.index', compact('pictures'));
     }
+
 
     /**
      * Show the form for creating a new resource.
