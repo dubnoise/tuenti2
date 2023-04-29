@@ -11,7 +11,14 @@
 <main>
     <div class="lateral-izq">
         <div class="profile-izq">
-            <img src={{asset('img/blank-user.jpg')}} alt="user">
+            @if ($profilePicture)
+                <img src="{{ $profilePicture }}" alt="{{ $user->profile_picture }}">
+            @else
+                <img src="{{ asset('storage/profile_pictures/default.jpg') }}" alt="default">
+            @endif
+
+
+
             <h3>Información</h3>
             <hr>
             <ul>
@@ -41,7 +48,7 @@
 
         <div class="ultimo-estado-perfil">
             @if(isset ($lastPost->content))
-                <h3>{{ $lastPost->content }} </h3>
+                <h3>{{ $lastPost->content }}</h3>
                 <p>{{ $duracion }}</p>
             @else
                 <p>Sin estado que mostrar.</p>
@@ -56,7 +63,5 @@
     </div>
 
 </main>
-
-
 
 @endsection

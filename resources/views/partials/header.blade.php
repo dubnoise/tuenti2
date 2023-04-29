@@ -27,7 +27,7 @@
     <div class="cabecera-2">
         <nav>
             <ul>
-                <a href="#"><li>Mi cuenta</li></a>
+                <a href="{{ route('users.edit', auth()->user()->id) }}"><li>Mi cuenta</li></a>
                 <a href={{route('logout')}}><li>Salir</li></a>
             </ul>
         </nav>

@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('city');
             $table->date('birthdate');
             $table->string('genre')->nullable();
+            $table->string('profile_picture')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

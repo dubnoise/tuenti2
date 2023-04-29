@@ -40,8 +40,14 @@
                     <hr>
                     @forelse ($posts as $post )
                         <div class="novedad">
-                            <a href="{{ route('users.show', $post->user->id) }}"><img src="img/blank-user.jpg"
-                                    alt="{{ $post->user->name }}"></a>
+                            <a href="{{ route('users.show', $post->user->id) }}">
+                                @if ($hasProfilePicture)
+                                    <img src="{{ asset('storage/profile_pictures/'.$post->user->profile_picture) }}" alt="{{ $post->user->profile_picture }}">
+                                @else
+                                    <img src="{{ asset('storage/profile_pictures/default.jpg') }}" alt="default">
+                                @endif
+                            </a>
+
                             <a href="{{ route('users.show', $post->user->id) }}">{{ $post->user->name }}
                                 {{ $post->user->surname }}</a>
                             <p>{{ $post->content }}</p>
@@ -49,10 +55,16 @@
                     @empty
                         <h2>No hay estados que mostrar</h2>
                     @endforelse
+
                     @forelse ($pictures as $picture)
                         <div class="novedad">
-                            <a href="{{ route('users.show', $picture->user->id) }}"><img src="img/blank-user.jpg"
-                                    alt="{{ $picture->user->name }}"></a>
+                            <a href="{{ route('users.show', $picture->user->id) }}">
+                                @if ($hasProfilePicture)
+                                    <img src="{{ asset('storage/profile_pictures/'.$picture->user->profile_picture) }}" alt="{{ $picture->user->profile_picture }}">
+                                @else
+                                    <img src="{{ asset('storage/profile_pictures/default.jpg') }}" alt="default">
+                                @endif
+                            </a>
                             <a href="{{ route('users.show', $picture->user->id) }}">{{ $picture->user->name }}
                                 {{ $picture->user->surname }}</a>
                                 <img src="{{ asset('storage/pictures/' . $picture->user->id . '/' . $picture->url . '.jpg') }}" alt="{{$picture->url}}">

@@ -611,3 +611,16 @@ main{
     margin-top: .3em;
     color: rgb(83, 82, 82);
 }
+
+/*ACTUALIZAR PERFIL*/
+
+.form-actualizar-perfil{
+    display: flex;
+    padding: 5em;
+    flex-direction: column;
+    border: 1px solid black;
+}
+.form-actualizar-perfil input{
+    padding: .5em;
+    margin: .8em;
+}

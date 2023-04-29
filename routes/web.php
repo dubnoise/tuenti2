@@ -36,6 +36,5 @@ Route::get('/pictures/{userId}', [PictureController::class, 'index'])->name('pic
 Route::resource('users', UserController::class);
 Route::resource('posts', PostController::class);
 Route::resource('messages', MessageController::class);
-
 Route::resource('pictures', PictureController::class);
 

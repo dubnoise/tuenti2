@@ -15,6 +15,7 @@ class LoginController extends Controller
     }
     public function register(RegisterRequest $request){
         $user = new User();
+
         $user->name = $request->get('name');
         $user->surname = $request->get('surname');
         $user->email = $request->get('email');
@@ -23,6 +24,7 @@ class LoginController extends Controller
         $user->city = $request->get('city');
         $user->birthdate = $request->get('birthdate');
         $user->genre = $request->get('genre');
+        $user->profile_picture = 'default.jpg';
 
         $user->save();
         Auth::login($user);

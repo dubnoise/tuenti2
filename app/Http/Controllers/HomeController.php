@@ -19,25 +19,30 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+{
+    $posts = Post::select('*')->orderBy('created_at', 'desc')->get();
+    $users = User::all();
+    $pictures = Picture::select('*')->orderBy('created_at', 'desc')->get();
 
-        $posts = Post::select('*')->orderBy('created_at', 'desc')->get();
-        $users = User::all();
-        $pictures = Picture::select('*')->orderBy('created_at', 'desc')->get();
+    $lastPost = '';
+    $duracion = '';
+    $hasProfilePicture = false;
 
-        $lastPost = '';
-        $duracion = '';
-        if (Auth::check()){
-            $lastPost = Post::select('*')->where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->first();
+    if (Auth::check()){
+        $lastPost = Post::select('*')->where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->first();
+        if ($lastPost != ''){
             $fecha = $lastPost->created_at;
-
             $fechaSubida = new Carbon($fecha);
             $fechaActual = Carbon::now();
             $duracion = isset($lastPost) ? Carbon::parse($lastPost->created_at)->locale('es')->diffForHumans(['options' => Carbon::JUST_NOW]) : '';
         }
-
-        return view('home', compact('posts', 'users', 'pictures', 'lastPost', 'duracion'));
+        $hasProfilePicture = file_exists(public_path('storage/profile_pictures/'.auth()->user()->profile_picture));
     }
+
+    return view('home', compact('posts', 'users', 'pictures', 'lastPost', 'duracion', 'hasProfilePicture'));
+}
+
+
 
     public function create()
     {
