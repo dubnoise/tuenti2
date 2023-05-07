@@ -2,24 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Picture;
-use App\Models\User;
+use App\Models\Visit;
 use Illuminate\Http\Request;
 
-class PictureController extends Controller
+class VisitController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($userId)
+    public function index()
     {
-        $pictures = Picture::where('user_id', $userId)->orderBy('created_at', 'desc')->get();
-        return view('pictures.index', compact('pictures'));
+        //
     }
-
-
 
     /**
      * Show the form for creating a new resource.
@@ -28,8 +24,7 @@ class PictureController extends Controller
      */
     public function create()
     {
-        $pictures = Picture::all();
-        return view('pictures.create', compact('pictures'));
+        //
     }
 
     /**
@@ -40,26 +35,16 @@ class PictureController extends Controller
      */
     public function store(Request $request)
     {
-        $picture = new Picture();
-        $picture->url = $request->get('url');
-        $picture->user_id = $request->get('user_id');
-        $picture->save();
-
-        if ($request->hasFile('picture')) {
-
-            $path = $request->file('picture')->storeAs('public/pictures/'.$picture->user_id, $picture->url.'.jpg', ['mode' => 777]);
-
-        }
-        return back();
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Picture  $picture
+     * @param  \App\Models\Visit  $visit
      * @return \Illuminate\Http\Response
      */
-    public function show(Picture $picture)
+    public function show(Visit $visit)
     {
         //
     }
@@ -67,10 +52,10 @@ class PictureController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Picture  $picture
+     * @param  \App\Models\Visit  $visit
      * @return \Illuminate\Http\Response
      */
-    public function edit(Picture $picture)
+    public function edit(Visit $visit)
     {
         //
     }
@@ -79,10 +64,10 @@ class PictureController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Picture  $picture
+     * @param  \App\Models\Visit  $visit
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Picture $picture)
+    public function update(Request $request, Visit $visit)
     {
         //
     }
@@ -90,10 +75,10 @@ class PictureController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Picture  $picture
+     * @param  \App\Models\Visit  $visit
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Picture $picture)
+    public function destroy(Visit $visit)
     {
         //
     }

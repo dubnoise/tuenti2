@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Message;
 use App\Models\Post;
+use App\Models\Visit;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\UserRequest;
 
 class UserController extends Controller
 {
@@ -17,6 +20,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         $users = User::all();
@@ -53,6 +57,28 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+        // Obtener el usuario del perfil
+        $user = User::findOrFail($user->id);
+
+        // Registrar la visita en la base de datos
+        if(auth()->check() && auth()->user()->id != $user->id){
+            $visitor_id = auth()->id();
+            DB::table('visits')->insert([
+                'user_id' => $user->id,
+                'visitor_id' => $visitor_id,
+                'created_at' => now(),
+            ]);
+        }
+
+
+
+        // Mostrar la vista del perfil con el número de visitas
+        $visits = DB::table('visits')
+                ->where('user_id', $user->id)
+                ->where('visitor_id', '!=', auth()->user()->id)
+                ->count();
+
+
         $lastPost = '';
         $duracion = '';
 
@@ -90,24 +116,38 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
 {
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'surname' => 'required|string|max:255',
+        'email' => 'required|email|unique:users,email,'.$user->id,
+        'password' => 'nullable|string|min:8|confirmed',
+        'profile_picture' => 'nullable|image|max:2048'
+    ], [
+        'name.required' => 'El nombre es obligatorio.',
+        'name.max' => 'El nombre no puede tener más de 255 caracteres.',
+        'surname.required' => 'El apellido es obligatorio.',
+        'surname.max' => 'El apellido no puede tener más de 255 caracteres.',
+        'email.required' => 'El correo electrónico es obligatorio.',
+        'email.email' => 'El correo electrónico debe ser válido.',
+        'email.unique' => 'Este correo electrónico ya está registrado.',
+        'password.min' => 'La contraseña debe tener al menos 8 caracteres.',
+        'password.confirmed' => 'Las contraseñas no coinciden.',
+        'profile_picture.image' => 'El archivo debe ser una imagen.',
+        'profile_picture.max' => 'La imagen no puede ser mayor a 2MB.'
+    ]);
 
     $user->name = $request->input('name');
     $user->surname = $request->input('surname');
     $user->email = $request->input('email');
 
-    if ($request->has('password') && $request->has('password_confirmation')) {
-        $user->password = Hash::make($request->input('password'));
+    if ($request->has('password') && $request->has('password_confirmation') && $request->input('password') != '') {
+        $password = $request->input('password');
+        $password_confirmation = $request->input('password_confirmation');
+
+        if ($password === $password_confirmation) {
+            $user->password = Hash::make($password);
+        }
     }
-
-    // if ($request->hasFile('profile_picture')) {
-    //     $image = $request->file('profile_picture');
-    //     $filename = time() . '.' . $image->getClientOriginalExtension();
-    //     $path = 'uploads/profile_pictures/' . $filename;
-    //     Storage::disk('public')->put($path, file_get_contents($image));
-
-    //     // Actualiza el campo 'profile_picture' del modelo de usuario con la URL de la imagen
-    //     $user->profile_picture = $path;
-    // }
 
     if ($request->hasFile('profile_picture')) {
         $profilePicture = $request->file('profile_picture');
@@ -120,6 +160,7 @@ class UserController extends Controller
 
     return redirect()->route('users.show', $user);
 }
+
 
 
     /**

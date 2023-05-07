@@ -359,7 +359,7 @@ main{
     background-color: white;
 }
 .novedades{
-    border: 1px solid red;
+    /* border: 1px solid red; */
     height: 100%;
     padding: .5rem;
 }
@@ -371,11 +371,11 @@ main{
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    background-color:rgb(210, 241, 255);
+    background-color:rgba(210, 241, 255, 0.271);
     width: auto;
     min-height: 10vh;
     padding: .5rem;
-    border: 1px solid black;
+    /* border: 1px solid black; */
 }
 .novedad a{
     /* border: 1px solid black; */
@@ -394,30 +394,32 @@ main{
 .novedad img{
     width: 50px;
     height: 50px;
-    border: 1px solid black;
+    border: 1px solid rgb(96, 96, 96);
+    padding: .06em;
 }
 
 .lateral-izq{
-    border: 1px solid black;
+    /* border: 1px solid black; */
     width: 22.5%;
     display: flex;
     justify-content: center;
 }
 .lateral-der{
-    border: 1px solid black;
+    /* border: 1px solid black; */
     width: 22.5%;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+
 }
 .central{
     width: 55%;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     display: flex;
     /* justify-content: center; */
     flex-direction: column;
 }
 .central .form-estado{
-    border: 1px solid green;
+    /* border: 1px solid green; */
     height: 7.3em;
     width: 100%;
     display: flex;
@@ -587,7 +589,6 @@ main{
 .mensaje-privado-perfil a:hover{
     background-color: rgb(211, 211, 211);
 }
-
 .ultimo-estado-perfil{
     background-color: rgba(215, 215, 215, 0.378);
     display: flex;
@@ -597,8 +598,12 @@ main{
     margin-top: 1em;
     border-radius: 4px;
     align-items: center;
+    justify-content: space-between;
     padding: 1em;
     border: 1px solid rgb(80, 80, 80);
+}
+.ultimo-estado-perfil .ultimo-estado{
+    display: flex;
 }
 .ultimo-estado-perfil h3{
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -610,6 +615,55 @@ main{
     font-size: .9em;
     margin-top: .3em;
     color: rgb(83, 82, 82);
+}
+.eliminar-estado-btn {
+    border: 0;
+    color: rgb(0, 0, 160);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: .8em;
+    font-weight: bold;
+    transition: all .1s ease-in-out;
+  }
+
+  .eliminar-estado-btn:hover {
+    cursor: pointer;
+    text-decoration: underline;
+    color:rgb(245, 29, 29);
+  }
+
+
+.album-fotos-perfil{
+    margin-top: .8em;
+    /* border: 1px solid black; */
+    width: 20vw;
+    max-height: 50vh;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-gap: 1.2em; /* Espacio entre elementos */
+}
+.album-fotos-perfil img{
+    border: 1px solid rgb(155, 155, 155);
+    width: 125px;
+    height: 90px;
+}
+.container-fotos-perfil{
+    /* border: 1px solid black; */
+    padding: .6em;
+}
+.container-fotos-perfil h4{
+    margin-top: 1.3em;
+    margin-bottom: .3em;
+}
+.container-fotos-perfil a{
+    color: rgb(0, 0, 160);
+}
+.container-fotos-perfil a:hover{
+    transition: all .1s;
+    text-shadow: 1px 1px 6px rgb(83, 83, 83);
+}
+.container-fotos-perfil a span{
+    color: rgb(76, 76, 76);
 }
 
 /*ACTUALIZAR PERFIL*/
@@ -623,4 +677,44 @@ main{
 .form-actualizar-perfil input{
     padding: .5em;
     margin: .8em;
+}
+
+/* HOME */
+
+
+
+.nombre-y-notificaciones{
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid black; */
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 10vh;
+}
+.nombre-y-notificaciones .nombre-y-foto-perfil{
+    display: flex;
+    align-items: center;
+}
+.nombre-y-foto-perfil img{
+    padding: .1em;
+    margin-top: 1em;
+    border: 1px solid rgb(116, 116, 116);
+}
+.nombre-y-notificaciones p span{
+    font-weight: bold;
+    color: black;
+}
+.nombre-y-notificaciones p{
+    font-size: 15px;
+    margin-left: 1.5em;
+    margin-bottom: .3em;
+    color:rgb(107, 107, 107);
+}
+.nombre-y-notificaciones h2{
+    margin-left: .5em;
+}
+.nombre-y-notificaciones img{
+    width: 50px;
+    height: 50px;
 }

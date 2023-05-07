@@ -13,10 +13,25 @@
 
         <main>
             <div class="lateral-izq">
-                <h2>-</h2>
+
+                <div class="nombre-y-notificaciones">
+                    <div class="nombre-y-foto-perfil">
+                        <img src="{{ asset('storage/profile_pictures/'.$user->profile_picture) }}" alt="{{ $user->profile_picture }}">
+                        <h2>{{ explode(' ', $user->name)[0] }} {{ explode(' ', $user->surname)[0] }}</h2>
+                        {{-- <img class="stats-img" src="img/stats.png" alt="stats"> --}}
+                    </div>
+                    @if ($visits == 0 || $visits > 1)
+                        <p><span>{{ $visits }}</span> visitas a tu perfil</p>
+                    @else
+                        <p><span>{{ $visits }}</span> visita a tu perfil</p>
+                    @endif
+                </div>
+
+
             </div>
 
             <div class="central">
+
                 <form action={{ route('posts.store') }} method="POST" class="form-estado">
                     @csrf
 
@@ -27,12 +42,10 @@
                             Error: {{ $message }}
                         @enderror
                     </p>
-
                     <div class="ultima-act">
-                        <p id="ult-act"><b>Última actualización:</b> <?php echo $lastPost->content ?? ''; echo ' '; echo $duracion ; ?></p>
+                        <p id="ult-act"><b style="font-size: 15px">Última actualización:</b> <b style="color: rgb(61, 61, 61)"><?php echo $lastPost->content ?? '';?></b> <?php echo ' '; echo $duracion ; ?></p>
                         <input type="submit" value="Guardar" class="guardar">
                     </div>
-
                 </form>
 
                 <div class="novedades">
