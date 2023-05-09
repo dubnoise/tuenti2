@@ -33,7 +33,8 @@
                         ¿?
                     @endif
                 </li>
-                <li><b>Fecha de nacimiento:</b> {{$user->birthdate}}</li>
+                <li><b>Fecha de nacimiento:</b> {{ date('d/m/Y', strtotime($user->birthdate)) }}</li>
+
             </ul>
         </div>
     </div>

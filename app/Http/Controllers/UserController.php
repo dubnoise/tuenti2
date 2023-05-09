@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\UserRequest;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -150,11 +151,25 @@ class UserController extends Controller
     }
 
     if ($request->hasFile('profile_picture')) {
+        if ($user->profile_picture !== 'default.jpg') {
+            // Eliminar la foto anterior si existe
+            Storage::delete('public/profile_pictures/'.$user->profile_picture);
+        }
         $profilePicture = $request->file('profile_picture');
         $filename = $profilePicture->getClientOriginalName();
         $profilePicture->storeAs('public/profile_pictures', $filename);
         $user->profile_picture = $filename;
     }
+
+
+    if ($request->has('delete_profile_picture')) {
+        if ($user->profile_picture !== 'default.jpg') {
+            // Eliminar foto de perfil
+            Storage::delete('public/profile_pictures/'.$user->profile_picture);
+            $user->profile_picture = 'default.jpg';
+        }
+    }
+
 
     $user->save();
 

@@ -397,6 +397,11 @@ main{
     border: 1px solid rgb(96, 96, 96);
     padding: .06em;
 }
+.novedad .img-novedad{
+    width: 7em;
+    height: 4em;
+    margin-left: 1em;
+}
 
 .lateral-izq{
     /* border: 1px solid black; */
@@ -471,6 +476,7 @@ main{
     margin: 0 auto;
     border: 1px solid rgba(0, 0, 0, 0.274);
     width: 90%;
+    height: 40%;
     margin-top: 1em;
 }
 .profile-izq ul{

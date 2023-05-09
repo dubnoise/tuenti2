@@ -55,6 +55,11 @@
                     <div class="error">{{ $message }}</div>
                 @enderror
 
+                <div>
+                    <input type="checkbox" name="delete_profile_picture" id="delete_profile_picture">
+                    <label for="delete_profile_picture">Eliminar foto de perfil</label>
+                </div>
+
                 <input type="submit" value="Actualizar">
             </div>
         </form>

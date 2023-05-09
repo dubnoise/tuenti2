@@ -80,7 +80,7 @@
                             </a>
                             <a href="{{ route('users.show', $picture->user->id) }}">{{ $picture->user->name }}
                                 {{ $picture->user->surname }}</a>
-                                <img src="{{ asset('storage/pictures/' . $picture->user->id . '/' . $picture->url . '.jpg') }}" alt="{{$picture->url}}">
+                                <img class="img-novedad" src="{{ asset('storage/pictures/' . $picture->user->id . '/' . $picture->url . '.jpg') }}" alt="{{$picture->url}}">
                         </div>
                     @empty
 
