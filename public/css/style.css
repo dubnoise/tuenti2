@@ -237,6 +237,7 @@ body{
     width: 25vw;
     height: 4vh;
     margin: 5px;
+    padding: .5em;
 }
 .form-registro .genre-class{
     text-align: center;
@@ -270,6 +271,7 @@ body{
     border-radius: 4px;
     height: 30px;
     border: 1px solid rgb(140, 137, 137);
+    cursor: pointer;
 }
 .continuar input:hover{
     background-color: rgba(169, 166, 166, 0.671);
@@ -278,6 +280,24 @@ body{
     width: 17px;
     height: 17px;
     margin-right: 8px;
+}
+.errores-registro {
+    margin-top: .2em;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding: 1em;
+    border-radius: 10px;
+    background-color: #addeff23; /* color de fondo */
+    margin-bottom: 1em; /* espacio entre los errores y el siguiente elemento */
+  }
+
+.errores-registro p {
+margin: 0;
+margin-bottom: .5em;
+font-weight: bold;
+color: #f84646; /* color de texto rojo */
 }
 
 /* CABECERA */
@@ -465,6 +485,16 @@ main{
 .form-estado .ultima-act p{
     font-size: 13px;
 }
+.placeholder-effect::placeholder {
+    transform: translate(5px, -10px);
+    font-size: 10px;
+    transition: all 0.2s ease-in-out;
+}
+.input-registro::placeholder {
+    color: rgba(142, 142, 142, 0.686);
+    transition: all 0.2s ease-in-out;
+}
+
 .profile-izq{
     background-color: rgba(213, 215, 216, 0.571);
     font-family:Verdana, Geneva, Tahoma, sans-serif;
@@ -723,4 +753,57 @@ main{
 .nombre-y-notificaciones img{
     width: 50px;
     height: 50px;
+}
+
+/* BÚSQUEDA */
+.busqueda-usuarios{
+    /* border: 10px solid green; */
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+}
+.busqueda-usuarios img{
+    width: 7em;
+    height: 7em;
+    border: 1px solid #747474;
+    padding: .1em;
+    border-radius: 2px;
+    margin-right: 1em;
+}
+.busqueda-usuarios img:hover{
+    box-shadow: 1px 1px 5px black;
+    transition: all .2s ease-in-out;
+}
+.foto-y-datos-busqueda{
+    display: flex;
+    /* border: 1px solid black; */
+}
+.datos-busqueda{
+    display: flex;
+    flex-direction: column;
+}
+.datos-busqueda a{
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 1em;
+}
+.datos-busqueda a:hover{
+    text-decoration: underline;
+}
+.botones-usuarios-busqueda{
+    display: flex;
+    padding: .5em;
+    align-items: center;
+    justify-content: center;
+}
+.botones-usuarios-busqueda a{
+    margin: .5em;
+    border: 1px solid rgb(114, 113, 113);
+    padding: .2em;
+    border-radius: 4px;
+    background-color: #c9c9c93e;
+    color: #3b3b3b;
+}
+.botones-usuarios-busqueda a:hover{
+    background-color: #c6c6c685;
 }

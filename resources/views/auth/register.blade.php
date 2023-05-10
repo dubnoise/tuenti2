@@ -15,21 +15,26 @@
             <h4>Registro</h4>
         </div>
 
+
+
         <div class="form-registro">
             <form action={{ route('registro') }} method="post">
                 @csrf
 
                 <label for="name">Nombre</label>
-                <input class="input-registro" type="text" name="name">
+                <input class="input-registro placeholder-effect" type="text" name="name" id="name-input" placeholder="Introduce tu nombre" value="">
+
+
+
                 <br>
                 <label for="surname">Apellidos</label>
-                <input class="input-registro" type="text" name="surname">
+                <input class="input-registro placeholder-effect" type="text" name="surname" placeholder="Introduce tus apellidos">
                 <br>
                 <label for="email">Email</label>
-                <input class="input-registro" type="email" name="email" id="email">
+                <input class="input-registro placeholder-effect" type="email" name="email" id="email" placeholder="Introduce tu email">
                 <br>
                 <label for="password">Contraseña</label>
-                <input class="input-registro" type="password" name="password">
+                <input class="input-registro placeholder-effect" type="password" name="password" placeholder="Introduce tu contraseña">
                 <br>
                 <label for="country">País</label>
                 <select class="input-registro" name="country" id="country">
@@ -66,13 +71,16 @@
                 </div>
             </form>
             @if ($errors->any())
-                <ul>
+                <div class="errores-registro">
                     @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
+                        <p class="error-registro">{{ $error }}</p>
                     @endforeach
-                </ul>
+                </div>
+
+
             @endif
         </div>
     </div>
+    <script src="{{ asset('js/register.js') }}"></script>
 
 @endsection

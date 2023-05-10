@@ -17,8 +17,6 @@
                 <img src="{{ asset('storage/profile_pictures/default.jpg') }}" alt="default">
             @endif
 
-
-
             <h3>Información</h3>
             <hr>
             <ul>
@@ -67,8 +65,6 @@
                 <p>Sin estado que mostrar.</p>
             @endif
         </div>
-
-
 
     </div>
     <div class="lateral-der">

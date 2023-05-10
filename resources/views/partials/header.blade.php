@@ -20,7 +20,6 @@
             <button type="submit">Buscar</button>
         </form>
 
-
         @include('pictures.create')
 
     </div>

@@ -26,29 +26,39 @@
         <hr>
 
         @if ($users->count() > 0)
-            <table class="table">
-                <tbody>
-                    @foreach ($users as $user)
-                        <tr>
 
+            @foreach ($users as $user)
+                <div class="busqueda-usuarios">
+
+                    <div class="foto-y-datos-busqueda">
+                        <a href="{{ route('users.show', $user->id) }}"><img src="{{ asset('storage/profile_pictures/'.$user->profile_picture) }}" alt="profile-image"></a>
+                        <div class="datos-busqueda">
                             <a href="{{ route('users.show', $user->id) }}">{{$user->name}}</a>
-                            <a href="{{ route('messages.create', 'id='.$user->id) }}">Mensaje privado</a>
+                            <p>Ubicación: <b>{{ $user->country }}</b></p>
+                            <p>Fecha de nacimiento: <b>{{ date('d/m/Y', strtotime($user->birthdate)) }}</b></p>
+                        </div>
+
+                    </div>
+
+                    <div class="botones-usuarios-busqueda">
+                        <a href="{{ route('messages.create', 'id='.$user->id) }}">Mensaje privado</a>
+                        <a href="#">Más acciones</a>
+                    </div>
+                    <hr>
+                </div>
 
 
-                            {{-- <a href={{route('messages.create', 'id='.$user->id)}}>
-                                <div class="message">
-                                    <h1>{{$user->name}}</h1>
-                                </div>
-                            </a> --}}
+                    {{-- <a href={{route('messages.create', 'id='.$user->id)}}>
+                        <div class="message">
+                            <h1>{{$user->name}}</h1>
+                        </div>
+                    </a> --}}
 
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+            @endforeach
+
         @else
             <p>No se encontraron resultados.</p>
         @endif
-
 
     </div>
     <div class="lateral-der">
