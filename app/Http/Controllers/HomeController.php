@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Picture;
+use App\Models\Friendship;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\PostRequest;
 use Carbon\Carbon;
@@ -21,32 +22,42 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $posts = Post::select('*')->orderBy('created_at', 'desc')->get();
-        $users = User::all();
-        $pictures = Picture::select('*')->orderBy('created_at', 'desc')->get();
-
         $lastPost = '';
         $duracion = '';
         $hasProfilePicture = false;
         $user = '';
         $visits = '';
 
-        if (Auth::check()){
+        if (Auth::check()) {
             $user = auth()->user();
+            $userFriends = $user->friends()->wherePivot('status', 'accepted')->pluck('friend_id')->toArray();
+            $friendFriends = Friendship::whereIn('friend_id', $userFriends)
+                ->where('user_id', '!=', $user->id)
+                ->where('status', 'accepted')
+                ->pluck('user_id')->toArray();
+            $friends = array_unique(array_merge($userFriends, $friendFriends));
+
+            $posts = Post::whereIn('user_id', $friends)->orderBy('created_at', 'desc')->get();
+            $pictures = Picture::whereIn('user_id', $friends)->orderBy('created_at', 'desc')->get();
+
             $visits = DB::table('visits')->where('user_id', $user->id)->count();
 
             $lastPost = Post::select('*')->where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->first();
-            if ($lastPost != ''){
+            if ($lastPost != '') {
                 $fecha = $lastPost->created_at;
                 $fechaSubida = new Carbon($fecha);
                 $fechaActual = Carbon::now();
                 $duracion = isset($lastPost) ? Carbon::parse($lastPost->created_at)->locale('es')->diffForHumans(['options' => Carbon::JUST_NOW]) : '';
             }
             $hasProfilePicture = file_exists(public_path('storage/profile_pictures/'.auth()->user()->profile_picture));
+        } else {
+            $posts = Post::select('*')->orderBy('created_at', 'desc')->get();
+            $pictures = Picture::select('*')->orderBy('created_at', 'desc')->get();
         }
 
-        return view('home', compact('posts', 'users', 'pictures', 'lastPost', 'duracion', 'hasProfilePicture', 'user', 'visits'));
+        return view('home', compact('posts', 'pictures', 'lastPost', 'duracion', 'hasProfilePicture', 'user', 'visits'));
     }
+
 
 
 
@@ -63,13 +74,7 @@ class HomeController extends Controller
      */
     public function store(Request $request)
     {
-        // // Crear un nuevo post y guardarlo en la base de datos
-        // $post = new Post;
-        // $post->content = $request->content;
-        // $post->save();
-
-        // // Redirigir al usuario a la página de inicio
-        // return redirect()->route('home');
+        //
     }
 
     /**

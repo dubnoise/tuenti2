@@ -27,6 +27,25 @@
                     @endif
                 </div>
 
+                @if(count(auth()->user()->pendingFriendRequests) > 0)
+                    <h3>Solicitudes de amistad pendientes:</h3>
+                    <ul>
+                        @foreach(auth()->user()->pendingFriendRequests as $friend)
+                            <li>{{ $friend->name }} te ha enviado una solicitud de amistad.</li>
+                            <form action="{{ route('friendship.acceptRequest', $friend->id) }}" method="post">
+                                @csrf
+                                <button type="submit">Aceptar solicitud</button>
+                            </form>
+                            <form action="{{ route('friendship.rejectRequest', $friend->id) }}" method="post">
+                                @csrf
+                                @method('PATCH')
+                                <button type="submit">Rechazar solicitud</button>
+                            </form>
+
+
+                        @endforeach
+                    </ul>
+                @endif
 
             </div>
 
@@ -51,6 +70,7 @@
                 <div class="novedades">
                     <h3>Novedades de tus amigos</h3>
                     <hr>
+
                     @forelse ($posts as $post )
                         <div class="novedad">
                             <a href="{{ route('users.show', $post->user->id) }}">

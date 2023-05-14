@@ -38,12 +38,20 @@ class PostController extends Controller
      */
     public function store(PostRequest $request)
     {
+        $user_id = $request->get('user_id');
+        $lastUserPost = Post::where('user_id', $user_id)->latest()->first();
+
+        if ($lastUserPost) {
+            $lastUserPost->delete();
+        }
+
         $post = new Post();
         $post->content = $request->get('content');
-        $post->user_id = $request->get('user_id');
+        $post->user_id = $user_id;
         $post->save();
 
         return redirect()->route('home');
+
     }
 
     /**

@@ -6,6 +6,8 @@ use App\Models\User;
 use App\Models\Message;
 use App\Models\Post;
 use App\Models\Visit;
+use App\Models\Comment;
+use App\Models\Friendship;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -61,6 +63,18 @@ class UserController extends Controller
         // Obtener el usuario del perfil
         $user = User::findOrFail($user->id);
 
+        // Obtener el último post del usuario
+        $lastPost = $user->posts()->latest()->first();
+
+        // Obtener los comentarios del usuario que sean de amigos
+        $userFriends = $user->friends()->wherePivot('status', 'accepted')->pluck('friend_id')->toArray();
+        $comments = Comment::whereIn('profile_user_id', $userFriends)->orderByDesc('created_at')->get();
+
+
+
+        // Calcular la duración del post
+        $duracion = $lastPost ? $lastPost->created_at->diffForHumans() : null;
+
         // Registrar la visita en la base de datos
         if(auth()->check() && auth()->user()->id != $user->id){
             $visitor_id = auth()->id();
@@ -71,30 +85,28 @@ class UserController extends Controller
             ]);
         }
 
+        $isFriend = false;
 
+        if (Auth::check()) {
+            $authUser = Auth::user();
+            if ($authUser->id != $user->id) {
+                $friendship = Friendship::where([
+                    ['user_id', $authUser->id],
+                    ['friend_id', $user->id]
+                ])->orWhere([
+                    ['user_id', $user->id],
+                    ['friend_id', $authUser->id]
+                ])->first();
 
-        // Mostrar la vista del perfil con el número de visitas
-        $visits = DB::table('visits')
-                ->where('user_id', $user->id)
-                ->where('visitor_id', '!=', auth()->user()->id)
-                ->count();
-
-
-        $lastPost = '';
-        $duracion = '';
-
-        $lastPost = Post::select('*')->where('user_id', $user->id)->orderBy('created_at', 'desc')->first();
-        if ($lastPost != ''){
-            $fecha = $lastPost->created_at;
-            $fechaSubida = new Carbon($fecha);
-            $fechaActual = Carbon::now();
-            $duracion = isset($lastPost) ? Carbon::parse($lastPost->created_at)->locale('es')->diffForHumans(['options' => Carbon::JUST_NOW]) : '';
+                if ($friendship && $friendship->status == 'accepted') {
+                    $isFriend = true;
+                }
+            }
         }
 
         $profilePicture = $user->profile_picture ? asset('storage/profile_pictures/'.$user->profile_picture) : null;
 
-        return view ('users.show', compact('user', 'lastPost', 'duracion', 'profilePicture'));
-
+        return view('users.show', compact('user', 'isFriend', 'profilePicture', 'lastPost', 'duracion', 'comments'));
     }
 
     /**
@@ -191,7 +203,7 @@ class UserController extends Controller
     public function search(Request $request)
     {
         $users = User::where('name', 'like', '%'.$request->input('q').'%')
-            ->orWhere('email', 'like', '%'.$request->input('q').'%')
+            ->orWhere('surname', 'like', '%'.$request->input('q').'%')
             ->get();
 
         return view('users.search', ['users' => $users]);

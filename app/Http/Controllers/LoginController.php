@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\RegisterRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Friendship;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -28,6 +29,13 @@ class LoginController extends Controller
 
         $user->save();
         Auth::login($user);
+
+        // Agregar amistad con el mismo usuario
+        $friendship = new Friendship();
+        $friendship->user_id = auth()->user()->id;
+        $friendship->friend_id = auth()->user()->id;
+        $friendship->status = 'accepted';
+        $friendship->save();
 
         return redirect()->route('home');
     }

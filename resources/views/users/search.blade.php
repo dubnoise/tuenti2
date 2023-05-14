@@ -14,15 +14,6 @@
     </div>
     <div class="central">
 
-        <form action="{{ route('users.search') }}" method="GET">
-            <div class="form-group">
-                <label for="q">Buscar usuario:</label>
-                <input type="text" id="q" name="q" class="form-control" value="{{ request('q') }}" required>
-            </div>
-
-            <button type="submit">Buscar</button>
-        </form>
-
         <hr>
 
         @if ($users->count() > 0)
@@ -33,8 +24,9 @@
                     <div class="foto-y-datos-busqueda">
                         <a href="{{ route('users.show', $user->id) }}"><img src="{{ asset('storage/profile_pictures/'.$user->profile_picture) }}" alt="profile-image"></a>
                         <div class="datos-busqueda">
-                            <a href="{{ route('users.show', $user->id) }}">{{$user->name}}</a>
-                            <p>Ubicación: <b>{{ $user->country }}</b></p>
+                            <a href="{{ route('users.show', $user->id) }}">{{ $user->name }} {{ $user->surname }}</a>
+                            <p>País: <b>{{ $user->country }}</b></p>
+                            <p>Ciudad: <b>{{ $user->city }}</b></p>
                             <p>Fecha de nacimiento: <b>{{ date('d/m/Y', strtotime($user->birthdate)) }}</b></p>
                         </div>
 
@@ -42,17 +34,34 @@
 
                     <div class="botones-usuarios-busqueda">
                         <a href="{{ route('messages.create', 'id='.$user->id) }}">Mensaje privado</a>
-                        <a href="#">Más acciones</a>
+
+                    @if(!auth()->user()->isFriendWith($user) && !$user->hasFriendRequestFrom(auth()->user()))
+                        <form action="{{ route('friendship.sendRequest', $user->id) }}" method="post">
+                            @csrf
+                            <button type="submit">Enviar solicitud de amistad</button>
+                        </form>
+                    @endif
+
+                    @if($user->hasFriendRequestFrom(auth()->user()))
+                        <form action="{{ route('friendship.cancelRequest', $user->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit">Cancelar solicitud de amistad</button>
+                        </form>
+                    @endif
+
+
+                    @if(auth()->user()->isFriendWith($user) && $user->id !== auth()->id())
+                        <form action="{{ route('friendship.deleteFriend', $user->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" onclick="return confirm(`¿Está seguro de que desea eliminar a {{ $user->name }} {{ $user->surname }} de la lista de amigos?`)">Eliminar amigo</button>
+                        </form>
+                    @endif
+
                     </div>
                     <hr>
                 </div>
-
-
-                    {{-- <a href={{route('messages.create', 'id='.$user->id)}}>
-                        <div class="message">
-                            <h1>{{$user->name}}</h1>
-                        </div>
-                    </a> --}}
 
             @endforeach
 
