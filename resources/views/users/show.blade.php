@@ -147,7 +147,7 @@
 
         <form action="{{ route('friendship.sendRequest', $user->id) }}" method="post">
             @csrf
-            <button type="submit">Enviar solicitud de amistad</button>
+            <button class="btn-user" type="submit">Enviar solicitud de amistad</button>
         </form>
 
         <div class="mensaje-privado-perfil">

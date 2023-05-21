@@ -135,6 +135,7 @@ body{
 }
 
 /* SOCIAL LOCAL MOVIL */
+
 .social-local-movil{
     /* border: 1px solid black; */
     display: flex;
@@ -294,13 +295,14 @@ body{
   }
 
 .errores-registro p {
-margin: 0;
-margin-bottom: .5em;
-font-weight: bold;
-color: #f84646; /* color de texto rojo */
+    margin: 0;
+    margin-bottom: .5em;
+    font-weight: bold;
+    color: #f84646; /* color de texto rojo */
 }
 
 /* CABECERA */
+
 .cabecera{
     color: white;
     display: flex;
@@ -400,6 +402,7 @@ color: #f84646; /* color de texto rojo */
 }
 
 /* MAIN */
+
 main{
     display: flex;
     /* justify-content: space-between; */
@@ -419,7 +422,6 @@ main{
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    background-color:rgba(210, 241, 255, 0.271);
     width: auto;
     min-height: 10vh;
     padding: .5rem;
@@ -789,8 +791,6 @@ main{
 
 /* HOME */
 
-
-
 .nombre-y-notificaciones{
     display: flex;
     flex-direction: column;
@@ -828,6 +828,7 @@ main{
 }
 
 /* BÚSQUEDA */
+
 .busqueda-usuarios{
     /* border: 10px solid green; */
     display: flex;
@@ -868,7 +869,7 @@ main{
     align-items: center;
     justify-content: center;
 }
-.botones-usuarios-busqueda a{
+.btn-user{
     margin: .5em;
     border: 1px solid rgb(114, 113, 113);
     padding: .2em;
@@ -876,6 +877,11 @@ main{
     background-color: #c9c9c93e;
     color: #3b3b3b;
 }
-.botones-usuarios-busqueda a:hover{
+.btn-user:hover{
+    cursor: pointer;
     background-color: #c6c6c685;
+}
+form .btn-user{
+    font-size: 16px;
+    height: 3.7vh;
 }
