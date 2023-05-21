@@ -17,7 +17,7 @@
 
         <form action="{{ route('users.search') }}" method="GET" enctype="multipart/form-data">
             <input type="text" id="q" name="q" class="form-control" value="{{ request('q') }}" placeholder="Buscar...">
-            <button type="submit">Buscar</button>
+            <button style="display: none" type="submit">Buscar</button>
         </form>
 
         @include('pictures.create')
