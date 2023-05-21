@@ -84,16 +84,16 @@
                     <label for="content">Comentario</label>
                     <textarea class="form-control" name="content" id="content" rows="3"></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary">Enviar comentario</button>
+                <button type="submit">Enviar comentario</button>
             </form>
 
             <hr>
 
-            @if($comments)
+            @if($user->comments->count() > 0)
                 <div class="comments">
                     <h4>Comentarios</h4>
-                    <p>{{ $comments->count() }} comentario(s)</p>
-                    @foreach($comments as $comment)
+                    <p>{{ $user->comments->count() }} comentario(s)</p>
+                    @foreach($user->comments as $comment)
                         <div class="comment">
                             <p>{{ $comment->user->name }} dice:</p>
                             <p>{{ $comment->content }}</p>
@@ -114,15 +114,32 @@
                     @forelse ($userPictures as $picture)
                         <img src="{{ asset('storage/pictures/' . $picture->user_id . '/' . $picture->url . '.jpg') }}" alt="{{$picture->url}}">
                     @empty
-                        <h2>Nada</h2>
+                        <p>...</p>
                     @endforelse
                 </div>
                 <br>
                 <hr>
                 <br>
                 <a href="/pictures/{{$user->id}}">Ver todas <span>({{ $user->pictures()->count() }})</span></a>
-
             </div>
+            <h4>Amigos</h4>
+            <br>
+            <hr>
+    <div class="amigos-perfil">
+        @forelse ($userFriends as $friend)
+            <div class="amigo">
+                <a href="{{ route('users.show', $friend->id) }}"><img src="{{ asset('storage/profile_pictures/'.$friend->profile_picture) }}" alt="{{ $friend->name }}"></a>
+                <a href="{{ route('users.show', $friend->id) }}"><p>{{ $friend->name }} {{ $friend->surname }}</p></a>
+            </div>
+        @empty
+            <p>...</p>
+        @endforelse
+    </div>
+    <br>
+    <hr>
+    <br>
+    <a class="verTodosAmigos" href="">Ver todos <span>({{ $userFriends->count() }})</span></a>
+    <br>
         </div>
     @else
 
@@ -139,6 +156,7 @@
     </div>
 
     @endif
+
 </main>
 
 @endsection

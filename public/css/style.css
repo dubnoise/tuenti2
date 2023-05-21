@@ -659,13 +659,13 @@ main{
     font-size: .8em;
     font-weight: bold;
     transition: all .1s ease-in-out;
-  }
+    }
 
-  .eliminar-estado-btn:hover {
+    .eliminar-estado-btn:hover {
     cursor: pointer;
     text-decoration: underline;
     color:rgb(245, 29, 29);
-  }
+}
 
 
 .album-fotos-perfil{
@@ -699,6 +699,50 @@ main{
     text-shadow: 1px 1px 6px rgb(83, 83, 83);
 }
 .container-fotos-perfil a span{
+    color: rgb(76, 76, 76);
+}
+
+.amigos-perfil{
+    margin-top: 1em;
+    /* border: 1px solid black; */
+    width: 20vw;
+    max-height: 50vh;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-gap: .2em; /* Espacio entre elementos */
+    /* border: 1px solid black; */
+}
+
+.amigo{
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid black; */
+}
+.amigo p{
+    font-size: .8em;
+    font-weight: bold;
+    color: rgb(0, 0, 160);
+}
+.amigo p:hover{
+    text-decoration: underline;
+}
+.amigo img:hover{
+    transition: all .1s;
+    box-shadow: 1px 1px 6px rgb(83, 83, 83);
+}
+.amigo img{
+    border: .1px solid rgb(76, 76, 76);
+    padding: .1em;
+    border-radius: 2px;
+    width: 5em;
+    height: 5em;
+}
+
+.verTodosAmigos {
+    color: rgb(0, 0, 160);
+}
+.verTodosAmigos span {
     color: rgb(76, 76, 76);
 }
 

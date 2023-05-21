@@ -17,7 +17,7 @@
         @forelse ($pictures as $picture)
             <img src="{{ asset('storage/pictures/' . $picture->user_id . '/' . $picture->url . '.jpg') }}" alt="{{$picture->url}}">
         @empty
-            <h2>Nada</h2>
+
         @endforelse
     </div>
 
@@ -26,8 +26,6 @@
     </div>
 
 </main>
-
-
 
 @endsection
 

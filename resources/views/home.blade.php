@@ -86,7 +86,7 @@
                             <p>{{ $post->content }}</p>
                         </div>
                     @empty
-                        <h2>No hay estados que mostrar</h2>
+                        <h2></h2>
                     @endforelse
 
                     @forelse ($pictures as $picture)

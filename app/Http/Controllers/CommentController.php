@@ -35,28 +35,23 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(User $user, Request $request)
-    {
-        $this->validate($request, [
-            'content' => 'required',
-        ]);
+    public function store($userId, Request $request)
+{
+    $this->validate($request, [
+        'content' => 'required',
+    ]);
 
-        $profileUser = User::findOrFail($user->id);
+    $user = User::findOrFail($userId);
 
-        if (Auth::check() && Auth::user()->id != $profileUser->id) {
-            $userFriends = $profileUser->friends()->wherePivot('status', 'accepted')->pluck('friend_id')->toArray();
+    $comment = new Comment();
+    $comment->user_id = auth()->user()->id;
+    $comment->profile_user_id = $user->id;
+    $comment->content = $request->input('content');
+    $comment->save();
 
-            if (in_array(Auth::user()->id, $userFriends)) {
-                $comment = new Comment();
-                $comment->user_id = Auth::user()->id;
-                $comment->profile_user_id = $profileUser->id;
-                $comment->content = $request->input('content');
-                $comment->save();
-            }
-        }
+    return redirect()->back();
+}
 
-        return redirect()->back();
-    }
 
 
     /**

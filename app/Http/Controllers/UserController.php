@@ -66,11 +66,9 @@ class UserController extends Controller
         // Obtener el último post del usuario
         $lastPost = $user->posts()->latest()->first();
 
-        // Obtener los comentarios del usuario que sean de amigos
-        $userFriends = $user->friends()->wherePivot('status', 'accepted')->pluck('friend_id')->toArray();
-        $comments = Comment::whereIn('profile_user_id', $userFriends)->orderByDesc('created_at')->get();
-
-
+        // // Obtener los comentarios del usuario que sean de amigos
+        // $userFriends = $user->friends()->wherePivot('status', 'accepted')->pluck('friend_id')->toArray();
+        // $comments = Comment::whereIn('profile_user_id', $userFriends)->orderByDesc('created_at')->get();
 
         // Calcular la duración del post
         $duracion = $lastPost ? $lastPost->created_at->diffForHumans() : null;
@@ -106,7 +104,21 @@ class UserController extends Controller
 
         $profilePicture = $user->profile_picture ? asset('storage/profile_pictures/'.$user->profile_picture) : null;
 
-        return view('users.show', compact('user', 'isFriend', 'profilePicture', 'lastPost', 'duracion', 'comments'));
+        // Obtener todos los amigos del usuario del perfil
+        $userFriendsUser = $user->friends()
+            ->wherePivot('status', 'accepted')
+            ->where('friend_id', '!=', $user->id)
+            ->get();
+
+        $userFriendsFriend = Friendship::where('friend_id', $user->id)
+            ->where('status', 'accepted')
+            ->where('user_id', '!=', $user->id)
+            ->with('user')
+            ->get();
+
+        $userFriends = $userFriendsUser->merge($userFriendsFriend->pluck('user'))->unique();
+
+        return view('users.show', compact('user', 'isFriend', 'profilePicture', 'lastPost', 'duracion', 'userFriends'));
     }
 
     /**
