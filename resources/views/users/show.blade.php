@@ -77,27 +77,42 @@
                 @endif
             </div>
             <hr>
-
+            <br>
+            <br>
+            <h3 style="margin-left: .6em; margin-bottom: .4em;">Tablón</h3>
             <form method="post" action="{{ route('comments.store', $user->id) }}">
                 @csrf
                 <div class="form-group">
-                    <label for="content">Comentario</label>
-                    <textarea class="form-control" name="content" id="content" rows="3"></textarea>
+                    @if ($profilePicture)
+                        <img src="{{ $profilePicture }}" alt="{{ $user->profile_picture }}">
+                    @else
+                        <img src="{{ asset('storage/profile_pictures/default.jpg') }}" alt="default">
+                    @endif
+                    <input type="text" class="form-control" name="content" id="content" placeholder="Escribe aquí..." />
                 </div>
-                <button type="submit">Enviar comentario</button>
+                <button style="display: none" type="submit">Enviar comentario</button>
             </form>
-
-            <hr>
 
             @if($user->comments->count() > 0)
                 <div class="comments">
-                    <h4>Comentarios</h4>
-                    <p>{{ $user->comments->count() }} comentario(s)</p>
-                    @foreach($user->comments as $comment)
+                    @foreach($user->comments()->orderByDesc('created_at')->get() as $comment)
                         <div class="comment">
-                            <p>{{ $comment->user->name }} dice:</p>
-                            <p>{{ $comment->content }}</p>
+                            <p>
+                                <a href="{{ route('users.show', $comment->user->id) }}">
+                                    <img src="{{ asset('storage/profile_pictures/'.$comment->user->profile_picture) }}" alt="img">
+                                </a>
+                                <div>
+                                    <span>
+                                        <a href="{{ route('users.show', $comment->user->id) }}">
+                                            {{ $comment->user->name }} {{ $comment->user->surname }}
+                                        </a>
+                                        <h3>{{ $comment->created_at->formatLocalized('%e de %B de %Y, a las %H:%M') }}</h3>
+                                    </span>
+                                    <span>{{ $comment->content }}</span>
+                                </div>
+                            </p>
                         </div>
+                        <hr>
                     @endforeach
                 </div>
             @endif

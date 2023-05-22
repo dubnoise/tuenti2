@@ -662,6 +662,7 @@ main{
     margin-left: .5em;
     height: 8vh;
     margin-top: 1em;
+    margin-bottom: 3em;
     border-radius: 4px;
     align-items: center;
     justify-content: space-between;
@@ -782,7 +783,7 @@ main{
     display: flex;
     padding: 5em;
     flex-direction: column;
-    border: 1px solid black;
+border: 1px solid black;
 }
 .form-actualizar-perfil input{
     padding: .5em;
@@ -884,4 +885,79 @@ main{
 form .btn-user{
     font-size: 16px;
     height: 3.7vh;
+}
+
+.form-group{
+    background-color: rgba(215, 215, 215, 0.378);
+    display: flex;
+    padding: 1em;
+    align-items: center;
+    border: 1px solid rgb(111, 111, 111);
+    width: 98%;
+    margin: 0 auto;
+    border-radius: 4px;
+    margin-bottom: 1.2em;
+}
+.form-group img{
+    padding: .1em;
+    border: 1px solid gray;
+    border-radius: 2px;
+    width: 2.6em;
+    height: 2.6em;
+}
+.form-group input{
+    width: 100vw;
+    height: 5.5vh;
+    margin-left: 1em;
+    padding: .4em;
+    font-size: 16px;
+}
+.form-group input::placeholder{
+    font-size: 16px;
+    color: #626262f3;
+}
+
+.comments{
+    width: 98%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid black; */
+}
+.comment{
+    padding: .8em;
+    height: 6em;
+    display: flex;
+    align-items: center;
+    /* border: 1px solid black; */
+}
+.comment img{
+    margin-right: 1em;
+    margin-bottom: .8em;
+    width: 2.8em;
+    height: 2.8em;
+    padding: .1em;
+    border: 1px solid gray;
+    border-radius: 2px;
+}
+.comment p{
+    display: flex;
+    align-items: center;
+}
+.comment span{
+    display: flex;
+    align-items: center;
+    margin-bottom: .8em;
+    font-size: 15px;
+}
+.comment span a{
+    font-weight: bold;
+    font-size: 15px;
+    color: rgb(0, 0, 160);
+}
+.comment h3{
+    color: #2c2c2cdf;
+    font-weight: lighter;
+    font-size: 13px;
+    margin-left: .8em;
 }
