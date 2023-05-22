@@ -781,13 +781,24 @@ main{
 
 .form-actualizar-perfil{
     display: flex;
-    padding: 5em;
+    padding: 2em;
     flex-direction: column;
-border: 1px solid black;
+    border: 1px solid black;
 }
 .form-actualizar-perfil input{
     padding: .5em;
     margin: .8em;
+    border-radius: 5px;
+}
+.form-actualizar-perfil label{
+    font-weight: bold;
+    color: #2c2c2cdf;
+    margin-left: .8em;
+}
+.form-actualizar-perfil .btn-actualizar{
+    width: 8em;
+    margin: 0 auto;
+    cursor: pointer;
 }
 
 /* HOME */
@@ -954,6 +965,9 @@ form .btn-user{
     font-weight: bold;
     font-size: 15px;
     color: rgb(0, 0, 160);
+}
+.comment span a:hover{
+    text-decoration: underline;
 }
 .comment h3{
     color: #2c2c2cdf;

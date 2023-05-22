@@ -42,7 +42,6 @@
                                 <button type="submit">Rechazar solicitud</button>
                             </form>
 
-
                         @endforeach
                     </ul>
                 @endif

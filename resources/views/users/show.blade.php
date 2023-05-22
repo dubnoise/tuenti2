@@ -80,14 +80,11 @@
             <br>
             <br>
             <h3 style="margin-left: .6em; margin-bottom: .4em;">Tablón</h3>
+
             <form method="post" action="{{ route('comments.store', $user->id) }}">
                 @csrf
                 <div class="form-group">
-                    @if ($profilePicture)
-                        <img src="{{ $profilePicture }}" alt="{{ $user->profile_picture }}">
-                    @else
-                        <img src="{{ asset('storage/profile_pictures/default.jpg') }}" alt="default">
-                    @endif
+                    <img src="{{ asset('storage/profile_pictures/'.auth()->user()->profile_picture) }}" alt="{{ auth()->user()->profile_picture }}">
                     <input type="text" class="form-control" name="content" id="content" placeholder="Escribe aquí..." />
                 </div>
                 <button style="display: none" type="submit">Enviar comentario</button>

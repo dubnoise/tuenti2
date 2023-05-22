@@ -15,17 +15,12 @@
             <h4>Registro</h4>
         </div>
 
-
-
         <div class="form-registro">
             <form action={{ route('registro') }} method="post">
                 @csrf
 
                 <label for="name">Nombre</label>
                 <input class="input-registro placeholder-effect" type="text" name="name" id="name-input" placeholder="Introduce tu nombre" value="">
-
-
-
                 <br>
                 <label for="surname">Apellidos</label>
                 <input class="input-registro placeholder-effect" type="text" name="surname" placeholder="Introduce tus apellidos">
@@ -76,8 +71,6 @@
                         <p class="error-registro">{{ $error }}</p>
                     @endforeach
                 </div>
-
-
             @endif
         </div>
     </div>

@@ -19,37 +19,37 @@
             @method('PUT')
 
             <div class="form-actualizar-perfil">
-                <label for="name">Nombre:</label>
+                <label for="name">Nombre</label>
                 <input type="text" name="name" id="name" value="{{ old('name', $user->name) }}">
                 @error('name')
                     <div class="error">{{ $message }}</div>
                 @enderror
 
-                <label for="surname">Apellidos:</label>
+                <label for="surname">Apellidos</label>
                 <input type="text" name="surname" id="surname" value="{{ old('surname', $user->surname) }}">
                 @error('surname')
                     <div class="error">{{ $message }}</div>
                 @enderror
 
-                <label for="email">Email:</label>
+                <label for="email">Email</label>
                 <input type="email" name="email" id="email" value="{{ old('email', $user->email) }}">
                 @error('email')
                     <div class="error">{{ $message }}</div>
                 @enderror
 
-                <label for="password">Contraseña:</label>
+                <label for="password">Contraseña</label>
                 <input type="password" name="password" id="password">
                 @error('password')
                     <div class="error">{{ $message }}</div>
                 @enderror
 
-                <label for="password_confirmation">Confirmar contraseña:</label>
+                <label for="password_confirmation">Confirmar contraseña</label>
                 <input type="password" name="password_confirmation" id="password_confirmation">
                 @error('password_confirmation')
                     <div class="error">{{ $message }}</div>
                 @enderror
 
-                <label for="profile_picture">Foto de perfil:</label>
+                <label for="profile_picture">Foto de perfil</label>
                 <input type="file" name="profile_picture" id="profile_picture">
                 @error('profile_picture')
                     <div class="error">{{ $message }}</div>
@@ -60,10 +60,9 @@
                     <label for="delete_profile_picture">Eliminar foto de perfil</label>
                 </div>
 
-                <input type="submit" value="Actualizar">
+                <input class="btn-actualizar" type="submit" value="Actualizar">
             </div>
         </form>
-
 
     </div>
     <div class="lateral-der">
