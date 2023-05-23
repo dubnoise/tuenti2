@@ -11,7 +11,7 @@
                 <a href="{{ route('home') }}"><li>Inicio</li></a>
                 <a href="{{ route('users.show', auth()->user()->id) }}"><li>Perfil</li></a>
                 <a href="{{ route('messages.index') }}"><li>Mensajes</li></a>
-                <a href="/users/search?q="><li>Gente</li></a>
+                <a href="/users/search/"><li>Gente</li></a>
             </ul>
         </nav>
 

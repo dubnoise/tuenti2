@@ -18,7 +18,7 @@
             @foreach ($messages as $message)
             <a href={{route('messages.show', $message->id)}}>
                 <div class="message">
-                    <img src={{asset('img/blank-user.jpg')}} alt="user">
+                    <img src="{{ asset('storage/profile_pictures/'.$message->user->profile_picture) }}" alt="user">
                     <h4>{{$message->name}}</h4>
                 </div>
             </a>
@@ -27,7 +27,7 @@
         </div>
     </div>
     <div class="lateral-der">
-        <h2>-</h2>
+
     </div>
 
 </main>

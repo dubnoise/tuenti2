@@ -10,7 +10,7 @@
 
 <main>
     <div class="lateral-izq">
-        <h2>-</h2>
+
     </div>
     <div class="central">
 
@@ -71,7 +71,7 @@
 
     </div>
     <div class="lateral-der">
-        <h2>-</h2>
+
     </div>
 
 </main>

@@ -25,9 +25,7 @@
                     @else
                         <p><span>{{ $visits }}</span> visita a tu perfil</p>
                     @endif
-                </div>
-
-                @if(count(auth()->user()->pendingFriendRequests) > 0)
+                    @if(count(auth()->user()->pendingFriendRequests) > 0)
                     <h3>Solicitudes de amistad pendientes:</h3>
                     <ul>
                         @foreach(auth()->user()->pendingFriendRequests as $friend)
@@ -45,6 +43,7 @@
                         @endforeach
                     </ul>
                 @endif
+                </div>
 
             </div>
 
@@ -108,7 +107,7 @@
             </div>
 
             <div class="lateral-der">
-                <h2>-</h2>
+
             </div>
 
         </main>
