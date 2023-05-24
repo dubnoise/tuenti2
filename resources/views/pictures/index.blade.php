@@ -10,19 +10,19 @@
 
 <main>
     <div class="lateral-izq">
-        <h2>-</h2>
     </div>
 
     <div class="central">
-        @forelse ($pictures as $picture)
-            <img src="{{ asset('storage/pictures/' . $picture->user_id . '/' . $picture->url . '.jpg') }}" alt="{{$picture->url}}">
-        @empty
+        <div class="fotos">
+            @forelse ($pictures as $picture)
+                <img src="{{ asset('storage/pictures/' . $picture->user_id . '/' . $picture->url . '.jpg') }}" alt="{{$picture->url}}">
+            @empty
 
-        @endforelse
+            @endforelse
+        </div>
     </div>
 
     <div class="lateral-der">
-        <h2>-</h2>
     </div>
 
 </main>

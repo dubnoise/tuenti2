@@ -47,7 +47,7 @@
             <form action="{{ route('friendship.deleteFriend', $user->id) }}" method="POST">
                 @csrf
                 @method('DELETE')
-                <button type="submit" onclick="return confirm(`¿Está seguro de que desea eliminar a {{ $user->name }} {{ $user->surname }} de la lista de amigos?`)">Eliminar amigo</button>
+                <button class="btn-user" type="submit" onclick="return confirm(`¿Está seguro de que desea eliminar a {{ $user->name }} {{ $user->surname }} de la lista de amigos?`)">Eliminar amigo</button>
 
             </form>
         @endif
@@ -156,11 +156,20 @@
     @else
 
     <div class="central">
+        @if(!auth()->user()->isFriendWith($user) && !$user->hasFriendRequestFrom(auth()->user()))
+            <form action="{{ route('friendship.sendRequest', $user->id) }}" method="post">
+                @csrf
+                <button class="btn-user" type="submit">Enviar solicitud de amistad</button>
+            </form>
+        @endif
 
-        <form action="{{ route('friendship.sendRequest', $user->id) }}" method="post">
-            @csrf
-            <button class="btn-user" type="submit">Enviar solicitud de amistad</button>
-        </form>
+        @if($user->hasFriendRequestFrom(auth()->user()))
+            <form action="{{ route('friendship.cancelRequest', $user->id) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button class="btn-user" type="submit">Cancelar solicitud de amistad</button>
+            </form>
+        @endif
 
         <div class="mensaje-privado-perfil">
             <a href="{{ route('messages.create', 'id='.$user->id) }}">Mensaje privado</a>

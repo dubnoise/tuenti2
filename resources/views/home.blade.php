@@ -13,37 +13,45 @@
 
         <main>
             <div class="lateral-izq">
+                <div class="sol-nombre">
+                    <div class="nombre-y-notificaciones">
+                        <div class="nombre-y-foto-perfil">
+                            <img src="{{ asset('storage/profile_pictures/'.$user->profile_picture) }}" alt="{{ $user->profile_picture }}">
+                            <h2>{{ explode(' ', $user->name)[0] }} {{ explode(' ', $user->surname)[0] }}</h2>
+                            {{-- <img class="stats-img" src="img/stats.png" alt="stats"> --}}
+                        </div>
+                        @if ($visits == 0 || $visits > 1)
+                            <p><span>{{ $visits }}</span> visitas a tu perfil</p>
+                        @else
+                            <p><span>{{ $visits }}</span> visita a tu perfil</p>
+                        @endif
 
-                <div class="nombre-y-notificaciones">
-                    <div class="nombre-y-foto-perfil">
-                        <img src="{{ asset('storage/profile_pictures/'.$user->profile_picture) }}" alt="{{ $user->profile_picture }}">
-                        <h2>{{ explode(' ', $user->name)[0] }} {{ explode(' ', $user->surname)[0] }}</h2>
-                        {{-- <img class="stats-img" src="img/stats.png" alt="stats"> --}}
                     </div>
-                    @if ($visits == 0 || $visits > 1)
-                        <p><span>{{ $visits }}</span> visitas a tu perfil</p>
-                    @else
-                        <p><span>{{ $visits }}</span> visita a tu perfil</p>
-                    @endif
                     @if(count(auth()->user()->pendingFriendRequests) > 0)
-                    <h3>Solicitudes de amistad pendientes:</h3>
-                    <ul>
-                        @foreach(auth()->user()->pendingFriendRequests as $friend)
-                            <li>{{ $friend->name }} te ha enviado una solicitud de amistad.</li>
-                            <form action="{{ route('friendship.acceptRequest', $friend->id) }}" method="post">
-                                @csrf
-                                <button type="submit">Aceptar solicitud</button>
-                            </form>
-                            <form action="{{ route('friendship.rejectRequest', $friend->id) }}" method="post">
-                                @csrf
-                                @method('PATCH')
-                                <button type="submit">Rechazar solicitud</button>
-                            </form>
-
-                        @endforeach
-                    </ul>
-                @endif
+                            <div class="sol-amistad">
+                                <h3>Solicitudes de amistad pendientes:</h3>
+                                <hr>
+                                <br>
+                                <ul>
+                                    @foreach(auth()->user()->pendingFriendRequests as $friend)
+                                        <li>¡<a href="{{ route('users.show', $friend->id) }}">{{ $friend->name }}</a> te ha enviado una solicitud de amistad!</li>
+                                        <div class="aceptar-rechazar">
+                                            <form action="{{ route('friendship.acceptRequest', $friend->id) }}" method="post">
+                                                @csrf
+                                                <button class="aceptar-sol" type="submit">Aceptar</button>
+                                            </form>
+                                            <form action="{{ route('friendship.rejectRequest', $friend->id) }}" method="post">
+                                                @csrf
+                                                @method('PATCH')
+                                                <button class="rechazar-sol" type="submit">Rechazar</button>
+                                            </form>
+                                        </div>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                 </div>
+
 
             </div>
 
