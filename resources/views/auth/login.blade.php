@@ -1,4 +1,9 @@
 <section class="login">
+    @if (isset($error))
+        <div class="error-login">
+            <p>{{ $error }}</p>
+        </div>
+    @endif
     <form class="form-login" action={{route('login')}} method="POST">
         @csrf
 
@@ -16,13 +21,6 @@
             </div>
         </div>
     </form>
-
-    @if (isset($error))
-        <ul>
-            <li>{{$error}}</li>
-        </ul>
-    @endif
-
 </section>
 <div class="linea-horizontal"></div>
 <div class="quieres-una-cuenta">

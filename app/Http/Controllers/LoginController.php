@@ -61,7 +61,7 @@ class LoginController extends Controller
             return redirect()->route('home');
         }
         else{
-            $error = 'Error al acceder a Tuenti.';
+            $error = 'Error al acceder a Tuenti';
             return view('home', compact('error'));
         }
     }
