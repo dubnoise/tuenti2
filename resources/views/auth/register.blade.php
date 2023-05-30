@@ -40,7 +40,7 @@
                 <select class="input-registro" name="city" id="city">
                     <option value="Valencia">Valencia</option>
                     <option value="Alicante">Alicante</option>
-                    <option value="Castellon">Castellón</option>
+                    <option value="Castellón">Castellón</option>
                 </select>
                 <br>
                 <label for="birthdate">Fecha de nacimiento</label>
